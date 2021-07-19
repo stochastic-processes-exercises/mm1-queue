@@ -23,9 +23,9 @@ class UnitTests(unittest.TestCase) :
         inputs, var = [], []
         for i in range(1,3) : 
             N=i*50
-            for j in range(1,4) : 
+            for j in range(1,3) : 
                lam=0.2*j
                inputs.append((N,lam,1,))
-               myvar1 = randomvar( 0, variance=1, vmin=0, isinteger=False )
+               myvar1 = randomvar( 0, variance=1, isinteger=False )
                var.append(myvar1)
         assert( check_func("test_queue", inputs, var, modname=helper) )
