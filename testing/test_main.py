@@ -11,21 +11,13 @@ from AutoFeedback.randomclass import randomvar
 import unittest
 from main import *
 
-class helper :
-   def test_queue( N, lam, expr ) :
-       times = my_queue( N, lam, expr )
-       mean, mean2 = sum(times) / N, sum(times*times) / N
-       var = ( N / (N-1) )*( mean2 - mean*mean )
-       return ( mean - 1/(expr-lam) ) / np.sqrt(var/N)      
-
 class UnitTests(unittest.TestCase) :
     def test_queue(self) :
         inputs, var = [], []
-        for i in range(1,3) : 
-            N=i*50
-            for j in range(1,3) : 
-               lam=0.2*j
-               inputs.append((N,lam,1,))
-               myvar1 = randomvar( 0, variance=1, isinteger=False )
-               var.append(myvar1)
-        assert( check_func("test_queue", inputs, var, modname=helper) )
+        for j in range(1,3) : 
+           lam=0.2*j
+           # Now setup the random variable 
+           inputs.append((200,lam,1,))
+           myvar1 = randomvar( 1/(1-lam), variance=0 )
+           var.append(myvar1)
+        assert( check_func("my_queue", inputs, var ) )
